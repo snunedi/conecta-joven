@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="admin-seccion">
+    <header class="admin-encabezado">
+        <h2>📰 Gestión de Bienestar</h2>
+        <a href="{{ url_for('admin_panel') }}" class="boton-secundario">⬅️ Volver al Panel</a>
+    </header>
+
+    <div class="panel-formulario">
+        <h4 class="subtitulo-panel">Nuevo Artículo</h4>
+        <form method="POST" class="formulario-puro">
+            <div class="grupo-input">
+                <label for="titulo">Título del Artículo</label>
+                <input type="text" id="titulo" name="titulo" class="input-texto" placeholder="Ingrese el título" required>
+            </div>
+            <div class="grupo-input">
+                <label for="contenido">Contenido</label>
+                <textarea id="contenido" name="contenido" class="input-area" rows="4" placeholder="Escriba aquí el contenido..." required></textarea>
+            </div>
+            <button type="submit" class="boton-accion-primario">Publicar Artículo</button>
+        </form>
+    </div>
+
+    <div class="contenedor-tabla">
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th class="texto-centrado">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for art in articulos %}
+                <tr>
+                    <td class="dato-titulo">{{ art.titulo }}</td>
+                    <td class="celda-acciones">
+                        <a href="{{ url_for('editar_bienestar', id=art.id_articulo) }}" class="enlace-editar">Editar</a>
+                        <a href="{{ url_for('eliminar_bienestar', id=art.id_articulo) }}" class="enlace-eliminar" onclick="return confirm('¿Eliminar este artículo?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

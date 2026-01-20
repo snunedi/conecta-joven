@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="contenedor-edicion-deporte">
+    <div class="panel-edicion">
+        <header class="encabezado-edicion">
+            <h3>🏀 Editar Taller Deportivo</h3>
+        </header>
+
+        <form method="POST" class="formulario-edicion">
+            <div class="campo-grupo">
+                <label for="nombre" class="etiqueta-formulario">Nombre del Taller</label>
+                <input type="text" id="nombre" name="nombre" class="input-edicion" value="{{ deporte.nombre_taller }}" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="precio" class="etiqueta-formulario">Precio</label>
+                <input type="number" id="precio" name="precio" class="input-edicion" value="{{ deporte.precio }}" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="id_comuna" class="etiqueta-formulario">Comuna</label>
+                <select id="id_comuna" name="id_comuna" class="select-edicion">
+                    {% for c in comunas %}
+                    <option value="{{ c.id_comuna }}" {% if c.id_comuna == deporte.id_comuna %}selected{% endif %}>
+                        {{ c.nombre_comuna }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="acciones-formulario">
+                <button type="submit" class="boton-actualizar">Actualizar Taller</button>
+                <a href="{{ url_for('admin_otros') }}" class="boton-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

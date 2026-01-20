@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="admin-contenedor">
+    <header class="admin-cabecera">
+        <h2>⚙️ Gestión de Deportes y Academia</h2>
+        <a href="{{ url_for('admin_panel') }}" class="boton-volver">⬅️ Volver al Panel</a>
+    </header>
+
+    <section class="admin-modulo">
+        <div class="modulo-titulo">
+            <h3>🏀 Gestión de Deportes</h3>
+        </div>
+        
+        <div class="panel-creacion">
+            <h5>Añadir Taller Deportivo</h5>
+            <form method="POST" class="formulario-lineal">
+                <input type="hidden" name="tipo_registro" value="deporte">
+                <input type="text" name="nombre" class="input-form" placeholder="Nombre Taller" required>
+                <input type="number" name="precio" class="input-form-corto" placeholder="Precio" required>
+                <select name="id_comuna" class="select-form" required>
+                    {% for c in comunas %}
+                    <option value="{{ c.id_comuna }}">{{ c.nombre_comuna }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="boton-primario-pro">Añadir</button>
+            </form>
+        </div>
+
+        <div class="tabla-scroll">
+            <table class="tabla-estilizada">
+                <thead>
+                    <tr>
+                        <th>Taller</th>
+                        <th>Precio</th>
+                        <th>Comuna</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for act in actividades %}
+                    <tr>
+                        <td>{{ act.nombre_taller }}</td>
+                        <td>${{ act.precio }}</td>
+                        <td>{{ act.nombre_comuna }}</td>
+                        <td class="acciones-celda">
+                            <a href="{{ url_for('editar_deporte', id=act.id_actividad) }}" class="link-edit">Editar</a>
+                            <a href="{{ url_for('eliminar_deporte', id=act.id_actividad) }}" class="link-del" onclick="return confirm('¿Borrar?')">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divisor-seccion">
+
+    <section class="admin-modulo">
+        <div class="modulo-titulo">
+            <h3>🎓 Gestión de Academia</h3>
+        </div>
+
+        <div class="panel-creacion">
+            <h5>Añadir Carrera Académica</h5>
+            <form method="POST" class="formulario-lineal">
+                <input type="hidden" name="tipo_registro" value="academia">
+                <input type="text" name="nombre" class="input-form" placeholder="Nombre Carrera" required>
+                <select name="id_institucion" class="select-form" required>
+                    {% for inst in inst_academia %}
+                    <option value="{{ inst.id_institucion }}">{{ inst.nombre_inst }}</option>
+                    {% endfor %}
+                </select>
+                <label class="check-container">
+                    <input type="checkbox" name="gratuidad">
+                    <span class="check-texto">Gratuidad</span>
+                </label>
+                <button type="submit" class="boton-primario-pro">Guardar</button>
+            </form>
+        </div>
+
+        <div class="tabla-scroll">
+            <table class="tabla-estilizada">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Institución</th>
+                        <th>Gratuidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for car in carreras %}
+                    <tr>
+                        <td>{{ car.nom_carrera }}</td>
+                        <td>{{ car.nombre_inst }}</td>
+                        <td>{{ "✅ Sí" if car.tiene_gratuidad == 1 else "❌ No" }}</td>
+                        <td class="acciones-celda">
+                            <a href="{{ url_for('editar_carrera', id=car.id_carrera) }}" class="link-edit">Editar</a>
+                            <a href="{{ url_for('eliminar_carrera', id=car.id_carrera) }}" class="link-del" onclick="return confirm('¿Borrar?')">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</section>
+{% endblock %}

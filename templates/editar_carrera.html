@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="contenedor-edicion-academia">
+    <div class="panel-edicion">
+        <header class="encabezado-edicion">
+            <h3>🎓 Editar Carrera Académica</h3>
+        </header>
+
+        <form method="POST" class="formulario-edicion">
+            <div class="campo-grupo">
+                <label for="nombre" class="etiqueta-formulario">Nombre de la Carrera</label>
+                <input type="text" id="nombre" name="nombre" class="input-edicion" value="{{ carrera.nom_carrera }}" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="id_institucion" class="etiqueta-formulario">Institución</label>
+                <select id="id_institucion" name="id_institucion" class="select-edicion">
+                    {% for inst in instituciones %}
+                    <option value="{{ inst.id_institucion }}" {% if inst.id_institucion == carrera.id_institucion %}selected{% endif %}>
+                        {{ inst.nombre_inst }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="campo-check">
+                <label class="switch-container">
+                    <input type="checkbox" name="gratuidad" id="gratuidad" {% if carrera.tiene_gratuidad == 1 %}checked{% endif %}>
+                    <span class="texto-check">Esta carrera cuenta con Gratuidad</span>
+                </label>
+            </div>
+
+            <div class="acciones-formulario">
+                <button type="submit" class="boton-actualizar">Actualizar Carrera</button>
+                <a href="{{ url_for('admin_otros') }}" class="boton-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

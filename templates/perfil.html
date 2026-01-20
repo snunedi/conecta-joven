@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="perfil-layout">
+    <aside class="perfil-sidebar">
+        <div class="perfil-card-usuario">
+            <div class="avatar-contenedor">
+                <img src="https://ui-avatars.com/api/?name={{ session['user_name'] }}&background=0D6EFD&color=fff" 
+                     alt="Avatar de {{ session['user_name'] }}" class="avatar-imagen">
+            </div>
+            <h4 class="perfil-nombre">{{ session['user_name'] }}</h4>
+            <p class="perfil-rol">Estudiante ConectaJoven</p>
+            <hr class="divisor-perfil">
+            <a href="{{ url_for('logout') }}" class="boton-perfil-salir">Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <main class="perfil-main">
+        <h3 class="perfil-titulo-seccion">⭐ Mi Selección Personalizada</h3>
+
+        <section class="fav-grupo">
+            <h5 class="fav-subtitulo deporte-color">🏀 Talleres Deportivos</h5>
+            <div class="fav-grid">
+                {% for fav in fav_deportes %}
+                <article class="fav-item-card borde-deporte">
+                    <div class="fav-info">
+                        <h6>{{ fav.nombre_taller }}</h6>
+                        <p>📍 {{ fav.nombre_comuna }} | ${{ fav.precio }}</p>
+                    </div>
+                    <a href="{{ url_for('eliminar_favorito', id=fav.id_favorito) }}" class="fav-eliminar">Eliminar</a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="fav-grupo">
+            <h5 class="fav-subtitulo academia-color">🎓 Carreras de Interés</h5>
+            <div class="fav-grid">
+                {% for fav in fav_academia %}
+                <article class="fav-item-card borde-academia">
+                    <div class="fav-info">
+                        <h6>{{ fav.nom_carrera }}</h6>
+                        <p>🏢 {{ fav.nombre_inst }}</p>
+                    </div>
+                    <a href="{{ url_for('eliminar_favorito', id=fav.id_favorito) }}" class="fav-eliminar">Eliminar</a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="fav-grupo">
+            <h5 class="fav-subtitulo bienestar-color">🌿 Artículos Útiles</h5>
+            <div class="fav-grid">
+                {% for fav in fav_bienestar %}
+                <article class="fav-item-card borde-bienestar">
+                    <div class="fav-info">
+                        <h6>{{ fav.titulo }}</h6>
+                        <p>Artículo de Salud y Bienestar</p>
+                    </div>
+                    <a href="{{ url_for('eliminar_favorito', id=fav.id_favorito) }}" class="fav-eliminar">Eliminar</a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</section>
+{% endblock %}

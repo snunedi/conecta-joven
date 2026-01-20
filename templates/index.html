@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="hero-inicio">
+    <div class="hero-contenido">
+        <h1 class="titulo-principal">Conecta Joven 2026</h1>
+        <p class="subtitulo">Tu plataforma integral para el crecimiento personal, deportivo y académico.</p>
+        
+        {% if not session.get('user_id') %}
+            <a href="{{ url_for('login') }}" class="boton boton-llamada">Comenzar Ahora</a>
+        {% else %}
+            <h3 class="saludo-usuario">¡Hola, {{ session['user_name'] }}!</h3>
+        {% endif %}
+    </div>
+</section>
+
+<section class="servicios-contenedor">
+    <div class="grid-personalizado">
+        
+        <article class="tarjeta-servicio">
+            <div class="icono icono-deporte">🏀</div>
+            <h3>Deportes</h3>
+            <p>Accede a talleres gratuitos y pagados en tu comuna para mantener una vida activa.</p>
+            <a href="{{ url_for('deportes') }}" class="enlace-servicio">Ver Talleres</a>
+        </article>
+
+        <article class="tarjeta-servicio">
+            <div class="icono icono-academia">🎓</div>
+            <h3>Academia</h3>
+            <p>Descubre carreras universitarias y técnicas con información sobre gratuidad.</p>
+            <a href="{{ url_for('academia') }}" class="enlace-servicio">Explorar Carreras</a>
+        </article>
+
+        <article class="tarjeta-servicio">
+            <div class="icono icono-bienestar">🌿</div>
+            <h3>Bienestar</h3>
+            <p>Artículos de salud mental y autocuidado redactados por especialistas.</p>
+            <a href="{{ url_for('bienestar') }}" class="enlace-servicio">Leer Artículos</a>
+        </article>
+
+    </div>
+</section>
+
+{% endblock %}

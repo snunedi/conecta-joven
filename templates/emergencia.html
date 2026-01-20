@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section class="contenedor-emergencia">
+
+    <header class="encabezado-sos">
+
+        <h1 class="titulo-alerta">🚨 Ayuda Inmediata</h1>
+
+        <p class="descripcion-sos">Si estás en peligro o necesitas asistencia urgente, utiliza estos números de contacto:</p>
+
+    </header>
+
+
+
+    <div class="grid-numeros-emergencia">
+
+        <a href="tel:133" class="boton-emergencia policia">
+
+            <span class="icono-tel">📞</span>
+
+            <div class="info-tel">
+
+                <span class="nombre-entidad">Carabineros</span>
+
+                <span class="numero-tel">133</span>
+
+            </div>
+
+        </a>
+
+
+
+        <a href="tel:1455" class="boton-emergencia vif">
+
+            <span class="icono-tel">📞</span>
+
+            <div class="info-tel">
+
+                <span class="nombre-entidad">Fono VIF</span>
+
+                <span class="numero-tel">1455</span>
+
+            </div>
+
+        </a>
+
+       
+
+        <a href="tel:131" class="boton-emergencia salud">
+
+            <span class="icono-tel">🚑</span>
+
+            <div class="info-tel">
+
+                <span class="nombre-entidad">SAMU</span>
+
+                <span class="numero-tel">131</span>
+
+            </div>
+
+        </a>
+
+    </div>
+
+   
+
+    <footer class="nota-seguridad">
+
+        <p>Tu ubicación actual no está siendo rastreada. Esta es una plataforma de información.</p>
+
+    </footer>
+
+</section>
+
+{% endblock %}

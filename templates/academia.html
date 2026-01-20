@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="seccion-academia">
+    <header class="encabezado-pagina">
+        <h2 class="titulo-academia">🎓 Oferta Académica</h2>
+        <p class="subtitulo">Explora carreras universitarias y técnicas con información de gratuidad.</p>
+    </header>
+
+    <div class="contenedor-tabla">
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Carrera</th>
+                    <th>Institución</th>
+                    <th class="texto-centrado">Gratuidad</th>
+                    <th class="texto-centrado">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in carreras %}
+                <tr>
+                    <td class="dato-titulo">{{ car.nom_carrera }}</td>
+                    <td>{{ car.nombre_inst }}</td>
+                    <td class="texto-centrado">
+                        <span class="badge-{{ 'gratuidad' if car.tiene_gratuidad == 1 else 'pago' }}">
+                            {{ "✅ Sí" if car.tiene_gratuidad == 1 else "❌ No" }}
+                        </span>
+                    </td>
+                    <td class="celda-acciones">
+                        <form action="{{ url_for('agregar_favorito') }}" method="POST">
+                            <input type="hidden" name="id_recurso" value="{{ car.id_carrera }}">
+                            <input type="hidden" name="tipo_recurso" value="academia">
+                            <button type="submit" class="boton-favorito-limpio">
+                                ❤️ Guardar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

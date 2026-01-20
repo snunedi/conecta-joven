@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="contenedor-auth-registro">
+    <div class="tarjeta-registro">
+        <header class="encabezado-auth">
+            <h2 class="titulo-auth">Crear Cuenta</h2>
+            <p class="subtitulo-auth">Únete a la comunidad de Conecta Joven</p>
+        </header>
+
+        <form method="POST" action="/registro" class="formulario-auth">
+            <div class="grupo-entrada">
+                <label for="nombre" class="etiqueta-auth">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" class="input-auth" required placeholder="Tu nombre y apellido">
+            </div>
+
+            <div class="grupo-entrada">
+                <label for="email" class="etiqueta-auth">Email</label>
+                <input type="email" id="email" name="email" class="input-auth" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="grupo-entrada">
+                <label for="password" class="etiqueta-auth">Contraseña</label>
+                <input type="password" id="password" name="password" class="input-auth" required placeholder="Crea una clave segura">
+            </div>
+
+            <button type="submit" class="boton-auth-principal">Registrarse</button>
+        </form>
+
+        <footer class="pie-auth">
+            <p>¿Ya tienes una cuenta? <a href="{{ url_for('login') }}" class="enlace-login">Inicia Sesión aquí</a></p>
+        </footer>
+    </div>
+</section>
+{% endblock %}

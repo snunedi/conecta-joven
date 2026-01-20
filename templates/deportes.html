@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="seccion-deportes">
+    <header class="encabezado-deportes">
+        <h2>🏀 Talleres Deportivos</h2>
+        <span class="etiqueta-conteo">{{ actividades|length }} actividades encontradas</span>
+    </header>
+    
+    <div class="panel-filtro">
+        <form method="POST" class="formulario-filtro">
+            <div class="grupo-filtro">
+                <select name="comuna" class="select-personalizado">
+                    <option value="Todas">🌍 Todas las comunas</option>
+                    {% for c in comunas %}
+                    <option value="{{ c.id_comuna }}">{{ c.nombre_comuna }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="boton-filtrar">Filtrar</button>
+        </form>
+    </div>
+
+    <div class="contenedor-tabla-deportes">
+        <table class="tabla-deportes">
+            <thead>
+                <tr>
+                    <th>Actividad</th>
+                    <th>Costo</th>
+                    <th>Ubicación</th>
+                    <th class="texto-centrado">Favorito</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for act in actividades %}
+                <tr>
+                    <td class="nombre-actividad">{{ act.nombre_taller }}</td>
+                    <td><span class="badge-precio">${{ act.precio }}</span></td>
+                    <td><span class="texto-ubicacion">📍 {{ act.nombre_comuna }}</span></td>
+                    <td class="texto-centrado">
+                        <form action="{{ url_for('agregar_favorito') }}" method="POST">
+                            <input type="hidden" name="id_recurso" value="{{ act.id_actividad }}">
+                            <input type="hidden" name="tipo_recurso" value="deporte">
+                            <button type="submit" class="boton-favorito-limpio">
+                                ❤️ Guardar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

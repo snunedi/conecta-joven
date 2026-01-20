@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="contenedor-edicion">
+    <div class="panel-edicion">
+        <header class="encabezado-edicion">
+            <h3>📝 Editar Artículo de Bienestar</h3>
+        </header>
+
+        <form method="POST" class="formulario-edicion">
+            <div class="campo-grupo">
+                <label for="titulo" class="etiqueta-formulario">Título del Artículo</label>
+                <input type="text" id="titulo" name="titulo" class="input-edicion" value="{{ articulo.titulo }}" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="contenido" class="etiqueta-formulario">Contenido del Artículo</label>
+                <textarea id="contenido" name="contenido" class="textarea-edicion" rows="10" required>{{ articulo.contenido }}</textarea>
+            </div>
+
+            <div class="acciones-formulario">
+                <button type="submit" class="boton-guardar">Guardar Cambios</button>
+                <a href="{{ url_for('admin_bienestar') }}" class="boton-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

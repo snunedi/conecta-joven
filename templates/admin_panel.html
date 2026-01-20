@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="panel-admin-contenedor">
+    
+    <header class="banner-bienvenida">
+        <h1 class="titulo-bienvenida">Bienvenida, {{ session['user_name'] }}</h1>
+        <p class="subtitulo-banner">Panel de Control Administrativo - Conecta Joven</p>
+    </header>
+
+    <div class="grid-modulos">
+        
+        <article class="tarjeta-modulo">
+            <div class="modulo-icono">🧘‍♀️</div>
+            <h3 class="modulo-titulo-bienestar">Módulo Bienestar</h3>
+            <p class="modulo-descripcion">Publica artículos sobre salud mental y consejos de bienestar.</p>
+            <a href="{{ url_for('admin_bienestar') }}" class="boton-admin boton-azul">Gestionar Artículos</a>
+        </article>
+
+        <article class="tarjeta-modulo">
+            <div class="modulo-icono">🚀</div>
+            <h3 class="modulo-titulo-otros">Módulo Otros</h3>
+            <p class="modulo-descripcion">Administra la oferta de talleres deportivos y carreras académicas.</p>
+            <a href="{{ url_for('admin_otros') }}" class="boton-admin boton-purpura">Gestionar Deportes/Academia</a>
+        </article>
+
+    </div>
+
+    <section class="resumen-operaciones">
+        <h3 class="resumen-titulo">📊 Resumen de Operaciones</h3>
+        <div class="contenedor-stats">
+            <div class="stat-item">
+                <span class="stat-valor valor-azul">Conectado</span>
+                <p class="stat-etiqueta">Servidor Aiven MySQL</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-valor valor-verde">Activa</span>
+                <p class="stat-etiqueta">Sesión de Administrador</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-valor valor-naranja">Titulación</span>
+                <p class="stat-etiqueta">Proyecto 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="admin-footer">
+        <a href="{{ url_for('logout') }}" class="enlace-seguro">🔒 Cerrar Sesión Segura</a>
+    </footer>
+
+</section>
+{% endblock %}

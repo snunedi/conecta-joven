@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="contenedor-login">
+    <div class="tarjeta-auth">
+        <header class="encabezado-auth">
+            <h2 class="titulo-auth">Iniciar Sesión</h2>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="contenedor-alertas-login">
+              {% for category, message in messages %}
+                <div class="alerta-login alerta-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="formulario-auth">
+            <div class="grupo-entrada">
+                <label for="email" class="etiqueta-auth">Correo Electrónico</label>
+                <input type="email" id="email" name="email" class="input-auth" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="grupo-entrada">
+                <label for="password" class="etiqueta-auth">Contraseña</label>
+                <input type="password" id="password" name="password" class="input-auth" required placeholder="********">
+            </div>
+
+            <button type="submit" class="boton-auth-principal">Entrar</button>
+        </form>
+        
+        <footer class="pie-auth">
+            <p>¿No tienes cuenta? <a href="/registro" class="enlace-registro">Regístrate</a></p>
+        </footer>
+    </div>
+</section>
+{% endblock %}

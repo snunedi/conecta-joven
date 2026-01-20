@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta Joven</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <header class="barra-navegacion">
+        <div class="contenedor-nav">
+            <a class="logo" href="{{ url_for('index') }}">🚀 Conecta Joven</a>
+            
+            <nav class="menu">
+                <ul class="lista-nav">
+                    <li><a href="{{ url_for('bienestar') }}">Bienestar</a></li>
+                    <li><a href="{{ url_for('deportes') }}">Deportes</a></li>
+                    <li><a href="{{ url_for('academia') }}">Academia</a></li>
+                    
+                    {% if session.get('user_rol') != 1 %}
+                    <li><a class="boton-sos" href="{{ url_for('sos') }}">🚨 SOS</a></li>
+                    {% endif %}
+
+                    {% if session.get('user_id') %}
+                        <li>
+                            <a class="texto-negrita" href="{{ url_for('perfil') }}">
+                                {% if session.get('user_rol') == 1 %}⚙️ Admin{% else %}👤 Mi Perfil{% endif %}
+                            </a>
+                        </li>
+                        <li><a href="{{ url_for('logout') }}">Salir</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Ingresar</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor-principal">
+        <section class="mensajes-flash">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alerta alerta-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </section>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Conecta Joven - Proyecto de Título</p>
+    </footer>
+</body>
+</html>

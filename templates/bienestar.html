@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="seccion-bienestar">
+    <header class="encabezado-pagina">
+        <h2 class="titulo-bienestar">🌿 Salud y Bienestar</h2>
+    </header>
+    
+    <div class="lista-articulos">
+        {% for art in articulos %}
+        <article class="articulo-card">
+            <div class="articulo-contenido">
+                <h3 class="articulo-titulo">{{ art.titulo }}</h3>
+                <p class="articulo-texto">{{ art.contenido }}</p>
+                
+                <footer class="articulo-pie">
+                    <form action="{{ url_for('agregar_favorito') }}" method="POST">
+                        <input type="hidden" name="id_recurso" value="{{ art.id_articulo }}">
+                        <input type="hidden" name="tipo_recurso" value="bienestar">
+                        <button type="submit" class="boton-util">
+                            ⭐ Marcar como útil
+                        </button>
+                    </form>
+                    <span class="autor-info">Publicado por el Administrador</span>
+                </footer>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
